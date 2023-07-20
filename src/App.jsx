@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import client from "./service/axios";
+import { client, request } from "./service/axios";
 
 import SearchInput from "./components/SearchInput";
 import ImageList from "./components/ImageList/index";
@@ -8,24 +8,37 @@ function App() {
   const [images, setImages] = useState([]);
 
   const searchHandler = (term) => {
-    const getSearchedImages = async () => {
-      const { data } = await client.get("/search/photos", {
+    const getSearchedImages = () => {
+      //   const { data } = await client.get("/search/photos", {
+      //     params: { query: term, per_page: 20 },
+      //   });
+      //   console.log(data);
+      //   setImages(data.results);
+
+      const response = request({
+        url: "/search/photos",
+        method: "GET",
         params: { query: term, per_page: 20 },
       });
-      console.log(data);
-      setImages(data.results);
+      response.then((data) => setImages(data.results));
     };
-
     getSearchedImages();
   };
 
   useEffect(() => {
-    const getImages = async () => {
-      const { data } = await client.get("/photos", {
+    const getImages = () => {
+      //   const { data } = await client.get("/photos", {
+      //     params: { per_page: 20 },
+      //   });
+      //   console.log(data);
+      //   setImages(data);
+
+      const response = request({
+        url: "/photos",
+        method: "GET",
         params: { per_page: 20 },
       });
-      console.log(data);
-      setImages(data);
+      response.then((data) => setImages(data));
     };
 
     getImages();
