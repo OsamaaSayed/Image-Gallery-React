@@ -9,10 +9,10 @@ export const client = axios.create({
 
 
 
-export const request = ({ ...options }) => {
-    return client(options)
-        .then(response => response.data)
-        .catch(err => err);
+export const request = async ({ ...options }) => {
+    const response = await client(options);
+    console.log(response);
+    return response.data;
 }
 
 

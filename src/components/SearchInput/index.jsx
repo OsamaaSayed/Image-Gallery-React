@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const SearchInput = ({ searchHandler }) => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -13,6 +13,7 @@ const SearchInput = ({ searchHandler }) => {
       <form onSubmit={submitHandler}>
         <div className="flex justify-center items-center">
           <input
+            required
             onChange={(event) => setSearchValue(event.target.value)}
             type="search"
             placeholder="Search Images..."
